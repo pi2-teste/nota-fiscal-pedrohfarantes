@@ -16,7 +16,6 @@ package br.senac.sp.notafiscalmvc.controller;
  */
 
 import br.senac.sp.notafiscalmvc.DAO.NotaFiscalDAO;
-import br.senac.sp.notafiscalmvc.model.NotaFiscal;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -27,12 +26,12 @@ public class NotaFiscalTable extends AbstractTableModel {
     private String[] columnNames = {"NumNota","ValNota"};
 
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     public int getRowCount() {
         //implementar metodo
-        return 3;
+        return NotaFiscalDAO.conta();
     }
 
     public String getColumnName(int col) {
@@ -40,7 +39,7 @@ public class NotaFiscalTable extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        //implementar metodo
+        //implementar metodo      
         return "esse retorno nao faz sentido, corrija quando chegar a hora";
     }
 

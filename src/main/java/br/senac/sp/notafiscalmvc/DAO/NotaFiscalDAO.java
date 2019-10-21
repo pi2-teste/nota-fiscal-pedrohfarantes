@@ -13,20 +13,29 @@ import java.util.ArrayList;
  * @author lucas
  */
 public class NotaFiscalDAO {
+
     private static ArrayList<NotaFiscal> listaNotas = new ArrayList<NotaFiscal>();
-    
+
     public static boolean addNota(NotaFiscal nota) {
-        
+
         listaNotas.add(nota);
         System.out.println("Agora lista geral");
         for (int i = 0; i < listaNotas.size(); i++) {
             NotaFiscal get = listaNotas.get(i);
             System.out.println(get.getNumNota());
             System.out.println(get.getValNota());
-            
+
         }
-        
+
         return true;
+    }
+
+    public static int conta() {
+        return listaNotas.size();
+    }
+
+    public static NotaFiscal linha(int i) {
+        return listaNotas.get(i);
     }
 
 }

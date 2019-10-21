@@ -7,7 +7,6 @@ package br.senac.sp.notafiscalmvc.view;
 
 import br.senac.sp.notafiscalmvc.controller.NotaFiscalController;
 
-
 /**
  *
  * @author lucas
@@ -18,12 +17,15 @@ public class NotaFiscalForm extends javax.swing.JFrame {
      * Creates new form notaFIscalForm
      */
     NotaFiscalController controller = new NotaFiscalController();
+
     public NotaFiscalForm() {
         initComponents();
-        
     }
-    
-    
+
+    public void refreshTable() {
+        tableNotas.invalidate();
+        tableNotas.repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,10 +44,10 @@ public class NotaFiscalForm extends javax.swing.JFrame {
         jTextValor = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
         jPanelListaDeNotas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableNotas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +76,7 @@ public class NotaFiscalForm extends javax.swing.JFrame {
                         .addGroup(jPanelRegistrarNotasLayout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1))
+                            .addComponent(jTextFieldNome))
                         .addGroup(jPanelRegistrarNotasLayout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -96,7 +98,7 @@ public class NotaFiscalForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRegistrarNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSalvar)
                 .addContainerGap(7, Short.MAX_VALUE))
@@ -104,18 +106,8 @@ public class NotaFiscalForm extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Registrar notas", jPanelRegistrarNotas);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Numero da nota", "Valor", "Produto"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        tableNotas.setModel(new NotaFiscalTable());
+        jScrollPane1.setViewportView(tableNotas);
 
         javax.swing.GroupLayout jPanelListaDeNotasLayout = new javax.swing.GroupLayout(jPanelListaDeNotas);
         jPanelListaDeNotas.setLayout(jPanelListaDeNotasLayout);
@@ -129,7 +121,7 @@ public class NotaFiscalForm extends javax.swing.JFrame {
         jPanelListaDeNotasLayout.setVerticalGroup(
             jPanelListaDeNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListaDeNotasLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -157,19 +149,18 @@ public class NotaFiscalForm extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:   
-        System.out.println("Clicou na nota");
+        System.out.println("Clicou no botão");
         System.out.println("Nota número: " + jTextNumNota.getText());
         System.out.println("Valor da nota: " + jTextValor.getText());
-        
-        //NotaFiscalController notaFiscalController = new NotaFiscalController(); 
-        
+        System.out.println("Nome do produto: " + jTextFieldNome.getText());
         int numNota;
         double valor;
-        
+        String nome;
         numNota = Integer.parseInt(jTextNumNota.getText());
-        valor = Double.parseDouble(jTextValor.getText()); 
-        
-        controller.salvar(numNota,valor);
+        valor = Double.parseDouble(jTextValor.getText());
+        nome = jTextFieldNome.getName();
+        controller.salvar(numNota, valor, nome);
+        refreshTable();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
@@ -217,9 +208,9 @@ public class NotaFiscalForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelRegistrarNotas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextNumNota;
     private javax.swing.JTextField jTextValor;
+    private javax.swing.JTable tableNotas;
     // End of variables declaration//GEN-END:variables
 }

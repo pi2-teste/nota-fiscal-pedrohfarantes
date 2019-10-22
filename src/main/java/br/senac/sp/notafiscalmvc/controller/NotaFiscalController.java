@@ -13,17 +13,19 @@ import br.senac.sp.notafiscalmvc.model.NotaFiscal;
  */
 public class NotaFiscalController {
 
-    public static boolean salvar(int numNota, double valNota, String nome) {
-        System.out.print("agora estou no controller");
-        System.out.println(numNota);
-        System.out.println(valNota);
-        System.out.println(nome);
+    public static boolean salvar(int numNota, double valNota, String nomeProduto) {
+        
+     
+        
         NotaFiscal nota = new NotaFiscal();
         nota.setNumNota(numNota);
         nota.setValNota(valNota);
-        nota.getNomeProduto(nome);   
+        nota.setNomeProduto(nomeProduto);   
+        
         NotaFiscalDAO dao = new NotaFiscalDAO();
-        dao.addNota(nota);  
+        
+        dao.addNota(nota);
+        
         return true;
     }
 }

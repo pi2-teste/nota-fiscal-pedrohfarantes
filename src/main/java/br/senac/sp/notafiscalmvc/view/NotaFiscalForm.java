@@ -6,6 +6,7 @@
 package br.senac.sp.notafiscalmvc.view;
 
 import br.senac.sp.notafiscalmvc.controller.NotaFiscalController;
+import br.senac.sp.notafiscalmvc.controller.NotaFiscalTable;
 
 /**
  *
@@ -16,10 +17,13 @@ public class NotaFiscalForm extends javax.swing.JFrame {
     /**
      * Creates new form notaFIscalForm
      */
-    NotaFiscalController controller = new NotaFiscalController();
+    public NotaFiscalController controller;
+    public NotaFiscalTable tabela;
 
     public NotaFiscalForm() {
         initComponents();
+        controller = new NotaFiscalController();
+        tabela = new NotaFiscalTable(); 
     }
 
     public void refreshTable() {
@@ -158,7 +162,7 @@ public class NotaFiscalForm extends javax.swing.JFrame {
         String nome;
         numNota = Integer.parseInt(jTextNumNota.getText());
         valor = Double.parseDouble(jTextValor.getText());
-        nome = jTextFieldNome.getName();
+        nome = jTextFieldNome.getText();
         controller.salvar(numNota, valor, nome);
         refreshTable();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
